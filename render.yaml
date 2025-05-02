@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: arquitecto-legiones
+    name: imperio-omega
     env: python
     plan: free
     buildCommand: ""
