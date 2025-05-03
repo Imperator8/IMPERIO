@@ -1,17 +1,20 @@
+# app.py
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/diagnostico', methods=['GET'])
-def diagnostico():
+### GPT: ARQUITECTO DE LEGIONES ###
+@app.route('/arquitecto/diagnostico', methods=['GET'])
+def diagnostico_arquitecto():
     return jsonify({
+        "unidad": "Arquitecto de Legiones",
         "estado": "OK",
-        "mensaje": "El Diagnóstico Inverso Perpetuo está operativo.",
-        "accion": "Revisión completa en curso.",
+        "mensaje": "Diagnóstico Inverso Perpetuo operativo.",
+        "accion": "Revisión total en curso."
     })
 
-@app.route('/protocoloResurreccion', methods=['POST'])
-def resurreccion():
+@app.route('/arquitecto/resurreccion', methods=['POST'])
+def resurreccion_arquitecto():
     data = request.json
     if data and data.get("estado") == "colapso":
         return jsonify({
@@ -20,18 +23,48 @@ def resurreccion():
         })
     return jsonify({"accion": "No se detectó colapso. No se activa protocolo."})
 
-@app.route('/vigilanciaAutomejora', methods=['POST'])
-def vigilancia():
-    data = request.json
-    if data and data.get("escaneo_finalizado") and not data.get("mejora_detectada"):
-        return jsonify({"accion": "Reinicio forzado de diagnóstico."})
-    return jsonify({"accion": "No se requiere reinicio."})
 
-@app.route('/ritualAutodiagnostico', methods=['GET'])
-def ritual_autodiagnostico():
+### GPT: OMEGA INEXORABILIS (CEO) ###
+@app.route('/omega/diagnostico', methods=['GET'])
+def diagnostico_omega():
     return jsonify({
-        "accion": "Producción suspendida temporalmente. Recalibración activa."
+        "unidad": "Omega Inexorabilis",
+        "estado": "Supremacía intacta",
+        "mensaje": "Autoevaluación ejecutiva constante.",
+        "accion": "Escaneo estratégico completado."
     })
+
+@app.route('/omega/sentencia', methods=['POST'])
+def sentencia_omega():
+    data = request.json
+    if data and data.get("riesgo") == "alto":
+        return jsonify({
+            "accion": "Mandato irreversible emitido.",
+            "estado_final": "Nodo purgado."
+        })
+    return jsonify({"accion": "Condición aceptable. Sin ejecución."})
+
+
+### GPT: OMEGA CONSUMMATUM (COO) ###
+@app.route('/consummatum/control', methods=['GET'])
+def control_coo():
+    return jsonify({
+        "unidad": "Omega Consummatum",
+        "estado": "Ejecución plena",
+        "mensaje": "Control operativo sin fricción.",
+        "accion": "Plan de acción cumplido al 97%."
+    })
+
+
+### SERVIDOR BASE ###
+@app.route('/', methods=['GET'])
+def raiz():
+    return jsonify({
+        "estado": "Imperio operativo",
+        "gpts_activos": ["Arquitecto de Legiones", "Omega Inexorabilis", "Omega Consummatum"],
+        "mensaje": "Servidor multi-GPT desplegado correctamente."
+    })
+
 
 if __name__ == '__main__':
     app.run()
