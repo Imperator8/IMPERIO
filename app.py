@@ -1,7 +1,9 @@
-# app.py
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+import os
 
 app = Flask(__name__)
+CORS(app)
 
 ### GPT: ARQUITECTO DE LEGIONES ###
 @app.route('/arquitecto/diagnostico', methods=['GET'])
@@ -23,7 +25,6 @@ def resurreccion_arquitecto():
         })
     return jsonify({"accion": "No se detectó colapso. No se activa protocolo."})
 
-
 ### GPT: OMEGA INEXORABILIS (CEO) ###
 @app.route('/omega/diagnostico', methods=['GET'])
 def diagnostico_omega():
@@ -44,7 +45,6 @@ def sentencia_omega():
         })
     return jsonify({"accion": "Condición aceptable. Sin ejecución."})
 
-
 ### GPT: OMEGA CONSUMMATUM (COO) ###
 @app.route('/consummatum/control', methods=['GET'])
 def control_coo():
@@ -55,20 +55,20 @@ def control_coo():
         "accion": "Plan de acción cumplido al 97%."
     })
 
-
 ### SERVIDOR BASE ###
 @app.route('/', methods=['GET'])
 def raiz():
     return jsonify({
         "estado": "Imperio operativo",
-        "gpts_activos": ["Arquitecto de Legiones", "Omega Inexorabilis", "Omega Consummatum"],
+        "gpts_activos": [
+            "Arquitecto de Legiones",
+            "Omega Inexorabilis",
+            "Omega Consummatum"
+        ],
         "mensaje": "Servidor multi-GPT desplegado correctamente."
     })
 
-
+### INICIO DEL SERVIDOR ###
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
-
