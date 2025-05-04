@@ -5,7 +5,7 @@ from adelitas import adelitas_bp
 app = Flask(__name__)
 CORS(app)
 
-# Registrar el Blueprint de las Adelitas
+# Registrar las Adelitas
 app.register_blueprint(adelitas_bp, url_prefix='/adelita')
 
 @app.route('/')
